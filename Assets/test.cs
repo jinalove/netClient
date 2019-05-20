@@ -1,4 +1,5 @@
-﻿using System;
+﻿using csharpServer;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,23 @@ public class test : MonoBehaviour {
 
     void Start ()
     {
+
+        //NetBufferWriter writer = new NetBufferWriter();
+        //Person person = new Person { cmd = 2, age = 18, name = "OK" };
+
+        //writer.WriteInt(person.cmd);
+        //writer.WriteInt(person.age);
+        //writer.WriteString(person.name);
+
+        //byte[] data = writer.Finish();
+
+        //NetBufferReader reader = new NetBufferReader(data);
+
+        //Debug.LogError(reader.ReadInt());
+        //Debug.LogError(reader.ReadInt());
+        //Debug.LogError(reader.ReadString());
+
+
         IPAddress ip = IPAddress.Parse("127.0.0.1");
         Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         try
@@ -136,6 +154,12 @@ public class test : MonoBehaviour {
                         buffer.RemoveRange(0, num);
                         Debug.Log("final buffer.Count:" + buffer.Count);
                         Debug.LogError("数据校验合格----------------------------------------");
+
+                        NetBufferReader reader = new NetBufferReader(data);
+
+                        Debug.LogError(reader.ReadInt());
+                        Debug.LogError(reader.ReadInt());
+                        Debug.LogError(reader.ReadString());
                         continue;
                     }
                     else
