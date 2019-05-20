@@ -32,7 +32,7 @@ public class test : MonoBehaviour {
         //Debug.LogError(reader.ReadInt());
         //Debug.LogError(reader.ReadInt());
         //Debug.LogError(reader.ReadString());
-
+        
 
         IPAddress ip = IPAddress.Parse("127.0.0.1");
         Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -48,15 +48,18 @@ public class test : MonoBehaviour {
         }
         try
         {
-            //  StartCoroutine(Sendor());
+           // StartCoroutine(Sendor(clientSocket));
+
+
+            
 
             // int receiveNumber = clientSocket.Receive(result);
             // Debug.LogError("receiveNumber:" + receiveNumber);
             //byte[] get = new byte[receiveNumber];
             //Array.Copy(result, get, receiveNumber);
 
-            StartCoroutine(Recycle(clientSocket));
-            StartCoroutine(Handle());
+             StartCoroutine(Recycle(clientSocket));
+             StartCoroutine(Handle());
 
 
         }
@@ -93,6 +96,10 @@ public class test : MonoBehaviour {
         {
             if (buffer.Count > 0)
             {
+                //Debug.LogError("有数据进来了!!!!!!"+ Encoding.Default.GetString(buffer.ToArray()));
+
+                //yield break;
+
                 Debug.Log("有数据进来了!!!!!!");
                 int index = 0;
                
@@ -185,7 +192,14 @@ public class test : MonoBehaviour {
 
     private IEnumerator Sendor(Socket clientSocket =null)
     {
-        yield return new WaitForSeconds(0f);
+        yield return new WaitForSeconds(2f);
+
+        //string str = "hello event";
+
+        //clientSocket.Send(Encoding.Default.GetBytes(str));
+
+        //yield break;
+
         //  PersonHandler person = new PersonHandler { cmd = 2, age = 18, name = "OK" };
         Person person = new Person { cmd = 2, age = 18, name = "OK" };
         bytes = SerializeHelper.SerializeToBinary(person);
