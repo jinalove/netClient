@@ -50,9 +50,6 @@ public class test : MonoBehaviour {
         {
            // StartCoroutine(Sendor(clientSocket));
 
-
-            
-
             // int receiveNumber = clientSocket.Receive(result);
             // Debug.LogError("receiveNumber:" + receiveNumber);
             //byte[] get = new byte[receiveNumber];
@@ -60,8 +57,6 @@ public class test : MonoBehaviour {
 
              StartCoroutine(Recycle(clientSocket));
              StartCoroutine(Handle());
-
-
         }
         catch (Exception ex)
         {
